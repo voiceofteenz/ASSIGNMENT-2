@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Simple queue (First In, First Out)
+        class Queue {
+            constructor() {
+                this.items = []
+            }
+            enqueue(item) {
+                this.items.push(item)
+            }
+            dequeue() {
+                return this.items.shift()
+            }
+            isEmpty() {
+                return this.items.length === 0
+            }
+        }
+
+        let numbers = new Queue()
+
+        // Ask until a valid number is entered; returns null if the user cancels
+        function readNumber(message) {
+            let value = prompt(message)
+            while (value !== null && (value.trim() === "" || isNaN(Number(value)))) {
+                value = prompt("Invalid input. " + message)
+            }
+            return value === null ? null : Number(value)
+        }
+
+        // Add the two numbers to the queue
+        let n1 = readNumber("Enter First number")
+        let n2 = (n1 === null) ? null : readNumber("Enter Second number")
+        if (n1 !== null && n2 !== null) {
+            numbers.enqueue(n1)
+            numbers.enqueue(n2)
+        }
+
+        // Remove them in the same order they were added
+        if (numbers.isEmpty()) {
+            document.write("No numbers were entered")
+        }
+        else {
+        let first = numbers.dequeue()
+        let second = numbers.dequeue()
+
+        if (first > second)
+        {
+            document.write("The first number " + first + " is greater than the second number " + second)
+        }
+        else if (second > first)
+        {
+            document.write("The second number " + second + " is greater than the first number " + first)
+        }
+        else
+        {
+            document.write("<h1>The Numbers are Equal</h1>")
+        }
+        }
+    </script>
+</body>
+</html>
